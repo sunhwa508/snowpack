@@ -1,10 +1,8 @@
-import React from 'react'
-import styles from './styles.module.css'
 import { MyComponent } from '../Components/MyComponent'
 import { Link, Route } from 'wouter-preact'
 import {Suspense, lazy} from 'preact/compat'
-
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
+import { h } from 'preact'
+const sleep = (ms:number) => new Promise(resolve => setTimeout(resolve,ms));
 
 const Dashboard = () => {
   return(
@@ -19,7 +17,7 @@ const Account = lazy(async() => {
 
 const App = () => {
   return(
-    <div className={styles.main}>
+    <div>
       <MyComponent name="hello"/>
       <ul>
         <li><Link href="/about">about</Link></li>
@@ -34,7 +32,7 @@ const App = () => {
       <Route path="/dashboard">
         <Dashboard />
       </Route>
-    <Suspense>    
+    <Suspense fallback={'loading...'}>    
       <Route path="/account">
         <Account />
       </Route>
